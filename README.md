@@ -18,10 +18,14 @@ _**No of members**_ : 1
 
 _**Name**_ : Harshita Kanal
 
-## Installation and Operating Instructions
+## Installation Instructions
 
 - Install yarn from https://yarnpkg.com/
+- Install Node from https://nodejs.org/en/
 - Clone the repository
+
+## Operating instructions
+
 ### Run `yarn install`
 This will install all the necessary dependencies.
 ### Run `yarn start`
