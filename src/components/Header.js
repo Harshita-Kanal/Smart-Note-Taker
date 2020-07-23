@@ -3,6 +3,8 @@ import {
     Navbar, NavbarBrand, Nav, NavbarToggler, NavItem, Button, NavLink
 } from 'reactstrap';
 import { Collapse } from 'reactstrap';
+
+
 import './header.css';
 
 class Header extends Component {
@@ -37,16 +39,18 @@ return (
         <Collapse isOpen={this.state.isNavOpen} navbar >
             <Nav navbar className = "item">
                 <NavItem >
-                    <NavLink href="" className="btn"><span className="fa fa-home fa-lg"></span> Home </NavLink>
+                    <NavLink href="/note" className="btn">
+                        <span className="fa fa-home fa-lg"></span> Notes </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="" className="btn"><span className="fa fa-list fa-lg"></span> Tasks </NavLink>  
+                    <NavLink href="/tasks" className="btn"><span className="fa fa-list fa-lg"></span> Tasks </NavLink>  
                 </NavItem>
                 <NavItem>
-                    <NavLink href="" className="btn" ><span className="fa fa-info fa-lg"></span> Discussion </NavLink>
+                    <NavLink href="/discussions" className="btn" ><span className="fa fa-info fa-lg"></span> Discussion </NavLink>
                 </NavItem>
                
             </Nav>
+
             <Nav className="ml-auto" navbar>
                 
                 <NavItem>
