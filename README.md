@@ -1,5 +1,5 @@
 
-# Smart note taker with text summarization <hr>
+# Smart note taker with text summarization 
 # Project's Overview
 
 _**Theme-Name**_ : Education
