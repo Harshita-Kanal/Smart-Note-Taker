@@ -1,6 +1,6 @@
 
-## Smart note taker with text summarization
-## Project's Overview
+# Smart note taker with text summarization
+# Project's Overview
 
 _**Theme-Name**_ : Education
 
@@ -18,7 +18,7 @@ _**No of members**_ : 1
 
 _**Name**_ : Harshita Kanal
 
-## Pre - requisites
+# Pre - requisites
 You need to have following tools installed on your computer
 
 * Git
@@ -29,7 +29,7 @@ You need to have following tools installed on your computer
 * Install Node from https://nodejs.org/en/
 * Clone the repository
 
-## Installation Instructions
+# Installation Instructions
 
 ### Unix/Linux 
 Debian based distributions (Debian / Ubuntu / Linux Mint / elementary OS) <br>
@@ -58,7 +58,7 @@ Open Node.js Downloads page <br>
 Download the macOS Installer(.pkg) <br>
 Run the downloaded Node-v.pkg Installer <br>
 
-## Getting the source <br> 
+# Getting the source <br> 
 In your terminal
 ### Clone SmartNote repository
 git clone https://github.com/Harshita-Kanal/Smart-Note-Taker.git
@@ -84,7 +84,7 @@ yarn install
 yarn start <br>
 
 
-## Commands
+# Commands
 ### `yarn install`
 This will install all the necessary dependencies.
 ### `yarn start`
