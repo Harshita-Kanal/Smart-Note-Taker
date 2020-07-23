@@ -84,7 +84,7 @@ yarn install
 yarn start <br>
 
 
-### Commands
+## Commands
 ### `yarn install`
 This will install all the necessary dependencies.
 ### `yarn start`
