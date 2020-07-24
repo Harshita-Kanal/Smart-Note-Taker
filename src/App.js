@@ -9,6 +9,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Note from './components/NoteComponent';
 import Discussion from './components/DiscussionComponent';
 import Task from './components/TaskComponent';
+import Cover from './components/CoverComponent';
 class App extends Component {
 
   render() { 
@@ -32,7 +33,7 @@ class App extends Component {
         />
         <Route
             path=""
-            component={Summarize}
+            component={Cover}
         />
 
         </Switch>

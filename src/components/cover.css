@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito+Sans:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@900&display=swap');
+img {
+    margin: 0 auto;
+    width: 270px;
+}
+
+.imgitem{
+    text-align: center;
+    display: block;
+    margin-top: 50px;
+
+}
+
+.taghead {
+   font-family: 'Nunito Sans', sans-serif;
+   font-size: 60px;
+   margin-top: 10px;
+}
+
+.tagbutton{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:large;
+    border-radius: 10px;
+}
+
+.tagbutton:hover { color:#ffffff; }
+
+
+

@@ -24,7 +24,7 @@
   padding: 60px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
   margin-bottom: 34px;  
-  width: 25%;
+  /* width: 25%; */
   margin-right: auto;
 }
 
@@ -51,6 +51,7 @@
   font-size: 16px;
   margin-bottom: 17px;
   border: 0;
+  border-radius: 10px;
   display: block;
   width: 100%;  
 }
@@ -93,14 +94,21 @@ li p {
 .formbutton {
   width: 100%;
   margin-top: 10px;
-   background-color: #FA6900;
+  background-color: crimson;
+  color: #fff;
   cursor: pointer;
+  padding: 18px 22px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 10px;
+  display: block;
+  width: 100%;  
 }
 
 .buttonitem {
   border-radius: 2px;
   min-width: 88px;
-  background-color: #FA6900;
+  background-color: crimson;
   cursor: pointer;
   border: 0;
   min-width: 120px;
