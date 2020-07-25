@@ -56,15 +56,17 @@
   width: 100%;  
 }
 
-/* ul {
+.myitems {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-} */
-/* 
-li {
-  width: calc(50% - 50px);
+}
+ 
+.myitem {
+  min-width: calc(50% - 50px);
+  /* width: 100%; */
+  float: left;
   list-style-type: none;
   margin-right: 50px;
   background-color: rgb(237, 237, 237);
@@ -77,9 +79,9 @@ h2 {
   padding: 0;
   margin: 0;
   font-weight: 400;
-} */
+} 
 
-li h3 {
+.myitems h3 {
   background-color: #103D5D;
   margin: 0;
   color: #fff;
@@ -87,7 +89,8 @@ li h3 {
   padding: 15px;
 }
 
-li p {
+
+.myitems p {
   padding: 15px;
 }
 
