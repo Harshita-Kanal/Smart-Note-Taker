@@ -67,8 +67,7 @@ constructor(props){
     render() {
         return (
             <div>
-                <h1>Notes</h1>
-
+                
                 <div className="containeritem"> 
                     <div className = "container">
                             <div className = "row">
@@ -92,8 +91,8 @@ constructor(props){
                                                     <li className= "myitem" key={item.id}>
                                                         <h3>{item.itemtitle}</h3>
                                                         <p>{item.body}</p>
-                                                        <p>{item.itemtag}
-                                                        <button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+                                                        <p><span id="tag">{item.itemtag}</span>
+                                                        <button className = "circle" onClick={() => this.removeItem(item.id)}>Remove Item</button>
                                                         </p>
                                                     </li>
                                                 )
