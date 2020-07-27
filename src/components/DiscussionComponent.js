@@ -11,13 +11,13 @@ class Discussion extends Component {
             comment: '',
             username: '',
             items: [],
-            user: null
+            // user: null
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.login = this.login.bind(this); 
-        this.logout = this.logout.bind(this);
+        // this.login = this.login.bind(this); 
+        // this.logout = this.logout.bind(this);
     }
 
     handleChange(e) {
@@ -27,23 +27,7 @@ class Discussion extends Component {
         console.log(this.state);
     }
 
-    logout() {
-    auth.signOut()
-        .then(() => {
-            this.setState({
-                user: null
-            });
-        });
-    }
-    login() {
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                this.setState({
-                    user
-                });
-            });
-    }
+  
 
     handleSubmit(e) {
         e.preventDefault();
@@ -52,7 +36,7 @@ class Discussion extends Component {
             projectitle: this.state.project,
             commentbody: this.state.comment,
             name: this.state.username,
-            user: this.state.user.displayName || this.state.user.email
+            user: this.props.user.displayName || this.props.user.email
             
         }
         itemsRef.push(item);
@@ -64,11 +48,11 @@ class Discussion extends Component {
     }
 
     componentDidMount() {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ user });
-            }
-        });
+        // auth.onAuthStateChanged((user) => {
+        //     if (user) {
+        //         this.setState({ user });
+        //     }
+        // });
         const itemsRef = firebase.database().ref(' projects ');
         itemsRef.on('value', (snapshot) => {
             let items = snapshot.val();
@@ -101,9 +85,9 @@ class Discussion extends Component {
             <div>
                 {/* <h1>Discussion</h1> */}
         <div className = "containeritem">
-                {this.state.user ?
+                {this.props.user ?
                     <div className='user-profile'>
-                        <img src={this.state.user.photoURL} />
+                        <img src={this.props.user.photoURL} />
                     </div>
                 :
                    <div></div>
@@ -115,19 +99,19 @@ class Discussion extends Component {
                                         <form onSubmit={this.handleSubmit}>
                                             <input className="project" type="text" name="project" placeholder="Add a project" onChange={this.handleChange} value={this.state.project} />
                                             <input className="project" type="text" name="comment" placeholder="Add a comment" onChange={this.handleChange} value={this.state.comment}/>
-                                        <input className="project" type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.user ? this.state.user.displayName || this.state.user.email : this.state.username}/>
+                                        <input className="project" type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.props.user ? this.props.user.displayName || this.props.user.email : this.state.username}/>
                                            
-                                           {this.state.user ?
+                                           {this.props.user ?
                                             <button  className="addit">Add project</button>
                                             :
                                             <div></div>
                                            }
                                         </form>
                                     {
-                                    this.state.user ?    
-                                            <table><button onClick={this.logout} className = "login">Logout</button></table>    
+                                    this.props.user ?    
+                                            <table><button onClick={this.props.logout} className = "login">Logout</button></table>    
                                     :
-                                            <table><button onClick={this.login} className="login">Login to discuss</button></table>
+                                            <table><button onClick={this.props.login} className="login">Login to discuss</button></table>
                                     }
                                     </section>
                                          
@@ -141,8 +125,8 @@ class Discussion extends Component {
                                                         <h3>{item.projectitle}</h3>
                                                         <p>{item.commentbody}</p>
                                                         <p><span id="tag">{item.user}</span> 
-                                                            {this.state.user ?
-                                                                item.user === this.state.user.displayName || item.user === this.state.user.email ? 
+                                                            {this.props.user ?
+                                                                item.user === this.props.user.displayName || item.user === this.props.user.email ? 
                                                              <button className="circle" onClick={() => this.removeItem(item.id)}>Remove Item</button> : null
                                                              :
                                                              <div></div>

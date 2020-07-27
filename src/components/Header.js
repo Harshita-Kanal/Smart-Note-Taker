@@ -3,9 +3,8 @@ import {
     Navbar, NavbarBrand, Nav, NavbarToggler, NavItem, Button, NavLink
 } from 'reactstrap';
 import { Collapse } from 'reactstrap';
-
-
 import './header.css';
+import firebase, {auth, provider} from '../firebase.js'
 
 class Header extends Component {
     constructor(props) {
@@ -13,9 +12,11 @@ class Header extends Component {
         this.state = {
             isNavOpen: false,
            
+           
         };
 
         this.toggleNav = this.toggleNav.bind(this);
+  
         
     }
 
@@ -24,6 +25,8 @@ class Header extends Component {
             isNavOpen: !this.state.isNavOpen
         });
     }
+
+ 
 
 render()
 {
@@ -54,7 +57,11 @@ return (
             <Nav className="ml-auto" navbar>
                 
                 <NavItem>
-                    <Button outline className="btn"><span className="fa fa-sign-in fa-lg"></span> Login</Button>
+                    { this.props.user ?
+                    <Button outline onClick  = {this.props.logout} className="btn"><span className="fa fa-sign-in fa-lg"></span> Logout</Button>
+                    :
+                    <Button outline onClick={this.props.login} className="btn"><span className="fa fa-sign-in fa-lg"></span> Login</Button>
+                }
                 </NavItem>
             </Nav>
         </Collapse>
@@ -65,5 +72,6 @@ return (
      )
 }
 }
+
 
 export default Header;

@@ -10,12 +10,50 @@ import Note from './components/NoteComponent';
 import Discussion from './components/DiscussionComponent';
 import Task from './components/TaskComponent';
 import Cover from './components/CoverComponent';
+import firebase, { auth, provider } from './firebase.js';
+
+
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user: null
+    }
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
+  login() {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
+  }
 
   render() { 
   return (
     <div>
-    <Header />
+    <Header login= {this.login} logout = {this.logout} user = {this.state.user}/>
     <BrowserRouter>
         <Switch>
         <Route
@@ -29,7 +67,7 @@ class App extends Component {
         />
         <Route
           path="/discussions"
-          component={Discussion}
+          component={() => <Discussion login = {this.login} logout = {this.logout} user = {this.state.user}/>}
         />
         <Route
             path=""
