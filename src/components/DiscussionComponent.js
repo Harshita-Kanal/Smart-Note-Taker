@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './discussion.css';
-import firebase from '../firebase.js';
+import firebase, {auth, provider} from '../firebase.js';
+import { Button } from 'reactstrap';
 
 class Discussion extends Component {
     constructor(props){
@@ -15,6 +16,8 @@ class Discussion extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.login = this.login.bind(this); 
+        this.logout = this.logout.bind(this);
     }
 
     handleChange(e) {
@@ -24,13 +27,33 @@ class Discussion extends Component {
         console.log(this.state);
     }
 
+    logout() {
+    auth.signOut()
+        .then(() => {
+            this.setState({
+                user: null
+            });
+        });
+    }
+    login() {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                this.setState({
+                    user
+                });
+            });
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         const itemsRef = firebase.database().ref(' projects ');
         const item = {
             projectitle: this.state.project,
             commentbody: this.state.comment,
-            name: this.state.username
+            name: this.state.username,
+            user: this.state.user.displayName || this.state.user.email
+            
         }
         itemsRef.push(item);
         this.setState({
@@ -41,6 +64,11 @@ class Discussion extends Component {
     }
 
     componentDidMount() {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ user });
+            }
+        });
         const itemsRef = firebase.database().ref(' projects ');
         itemsRef.on('value', (snapshot) => {
             let items = snapshot.val();
@@ -50,7 +78,8 @@ class Discussion extends Component {
                     id: item,
                     projectitle: items[item].projectitle,
                     commentbody: items[item].commentbody,
-                    name: items[item].name
+                    name: items[item].name,
+                    user: items[item].user
                 });
             }
             this.setState({
@@ -72,7 +101,13 @@ class Discussion extends Component {
             <div>
                 {/* <h1>Discussion</h1> */}
         <div className = "containeritem">
-            
+                {this.state.user ?
+                    <div className='user-profile'>
+                        <img src={this.state.user.photoURL} />
+                    </div>
+                :
+                   <div></div>
+                }
                 <div className = "container" >
                     <div className = "row">
                                 <div className = "col-12 col-md-4">
@@ -80,10 +115,23 @@ class Discussion extends Component {
                                         <form onSubmit={this.handleSubmit}>
                                             <input className="project" type="text" name="project" placeholder="Add a project" onChange={this.handleChange} value={this.state.project} />
                                             <input className="project" type="text" name="comment" placeholder="Add a comment" onChange={this.handleChange} value={this.state.comment}/>
-                                            <input className="project" type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username}/>
-                                            <button className="addit">Add project</button>
+                                        <input className="project" type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.user ? this.state.user.displayName || this.state.user.email : this.state.username}/>
+                                           
+                                           {this.state.user ?
+                                            <button  className="addit">Add project</button>
+                                            :
+                                            <div></div>
+                                           }
                                         </form>
+                                    {
+                                    this.state.user ?    
+                                            <table><button onClick={this.logout} className = "login">Logout</button></table>    
+                                    :
+                                            <table><button onClick={this.login} className="login">Login to discuss</button></table>
+                                    }
                                     </section>
+                                         
+
                                 </div>
                                 <div className = "col-12 col-md">
                                         <ul className="myprojects">
@@ -92,8 +140,14 @@ class Discussion extends Component {
                                                     <li className="myproject" key={item.id}>
                                                         <h3>{item.projectitle}</h3>
                                                         <p>{item.commentbody}</p>
-                                                        <p><span id="tag">{item.name}</span> 
-                                                            <button className="circle" onClick={() => this.removeItem(item.id)}>Remove Item</button>
+                                                        <p><span id="tag">{item.user}</span> 
+                                                            {this.state.user ?
+                                                                item.user === this.state.user.displayName || item.user === this.state.user.email ? 
+                                                             <button className="circle" onClick={() => this.removeItem(item.id)}>Remove Item</button> : null
+                                                             :
+                                                             <div></div>
+                                                 
+                                                             }
                                                         </p>
                                                     </li>
                                                 )

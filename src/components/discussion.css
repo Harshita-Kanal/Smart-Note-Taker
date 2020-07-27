@@ -18,6 +18,41 @@
   margin: 0;
   padding: 0;
 }
+
+.login{
+   min-width: 88px;
+  background-color: crimson;
+  cursor: pointer;
+  border: 0;
+  min-width: 120px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  padding: 10px 6px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+form, table {
+     display:inline;
+     margin:8px;
+     padding:0px;
+}
+
+.user-profile {
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  max-width: 100%;
+}
+
  
 h1{
    font-family:'Crete Round', serif ;
@@ -96,7 +131,7 @@ font-family: 'Crete Round', serif;
 }
 
 .addit{
-  border-radius: 2px;
+ 
   min-width: 88px;
   background-color: crimson;
   cursor: pointer;
@@ -107,5 +142,7 @@ font-family: 'Crete Round', serif;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
   border-radius: 10px;
+  text-align: center;
+  margin-left: 0px;
 
 }
