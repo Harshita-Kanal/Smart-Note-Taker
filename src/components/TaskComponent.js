@@ -28,11 +28,13 @@ class Task extends Component {
         const item = {
             tasktitle: this.state.title,
             body: this.state.description,
+            user: this.props.user ? this.props.user.displayName || this.props.user.email : '' 
         }
         itemsRef.push(item);
         this.setState({
             title: '',
             description: '',
+
         });
     }
 
@@ -46,6 +48,7 @@ class Task extends Component {
                     id: item,
                     tasktitle: items[item].tasktitle,
                     body: items[item].body,
+                    user: items[item].user
             
                 });
             }
@@ -75,7 +78,11 @@ class Task extends Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <input className="inputitem" type="text" name="title" placeholder="Add a task" onChange={this.handleChange} value={this.state.title} />
                                         <input className="inputitem" type="text" name="description" placeholder="Add the description" onChange={this.handleChange} value={this.state.description} />
-                                        <button className="formbutton">Add task</button>
+                                        {
+                                        this.props.user ?
+                                        <button className="formbutton">Add task</button> :
+                                         <h3 className = "warning">Login to add</h3> 
+                                        }
                                     </form>
                                 </section>
                             </div>
@@ -85,8 +92,9 @@ class Task extends Component {
 
                                     <ul className="myitems">
                                         {this.state.items.map((item) => {
+                                            if (this.props.user)
+                                                if (item.user === this.props.user.displayName || item.user === this.props.user.email) 
                                             return (
-                                
                                                 <li className="myitem" key={item.id}>
                                                     <h3>{item.tasktitle}</h3>
                                                     <p>{item.body}</p>
@@ -94,6 +102,12 @@ class Task extends Component {
                                                         <button className="circle" onClick={() => this.removeItem(item.id)}>Remove Task</button>
                                                     </p>
                                                 </li>
+                                            )
+                                            else
+                                            return (
+                                               
+                                                <div key={item.id}></div>
+                                               
                                             )
                                         })}
                                     </ul>

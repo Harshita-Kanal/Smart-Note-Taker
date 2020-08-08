@@ -53,17 +53,17 @@ class App extends Component {
   render() { 
   return (
     <div>
-    <Header login= {this.login} logout = {this.logout} user = {this.state.user}/>
+    <Header login= {this.login} logout = {this.logout} user = {this.state.user} />
     <BrowserRouter>
         <Switch>
         <Route
           path="/note"
-          component={Note}
+            component={() => <Note login={this.login} logout={this.logout} user={this.state.user} />}
           exact
         />
         <Route
           path="/tasks"
-          component={Task}
+            component={() => <Task login={this.login} logout={this.logout} user={this.state.user} />}
         />
         <Route
           path="/discussions"

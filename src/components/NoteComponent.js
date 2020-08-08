@@ -29,7 +29,8 @@ constructor(props){
         const item = {
             itemtitle: this.state.title,
             body: this.state.itembody,
-            itemtag: this.state.tag     
+            itemtag: this.state.tag,
+            user: this.props.user ? this.props.user.displayName || this.props.user.email : ''     
         }
         itemsRef.push(item);
         this.setState({
@@ -49,7 +50,8 @@ constructor(props){
                     id: item,
                     itemtitle: items[item].itemtitle,
                     body: items[item].body,
-                    itemtag: items[item].itemtag
+                    itemtag: items[item].itemtag,
+                    user: items[item].user
                 });
             }
             this.setState({
@@ -77,7 +79,10 @@ constructor(props){
                                             <input className="inputitem" type="text" name="title" placeholder="What's the title?" onChange={this.handleChange} value={this.state.title} />
                                             <input className="inputitem" type="text" name="itembody" placeholder="What to remember?" onChange={this.handleChange} value={this.state.itembody} />
                                             <input className="inputitem" type="text" name="tag" placeholder="Set a Tag" onChange={this.handleChange} value={this.state.tag} />
-                                            <button className = "formbutton">Add Item</button>
+                                            {this.props.user ?
+                                            <button className = "formbutton">Add Item</button> :
+                                             <h3 className = "warning">Login to add</h3> 
+                                            }
                                         </form>
                                     </section>
                                 </div> 
@@ -87,6 +92,8 @@ constructor(props){
                                        
                                             <ul className = "myitems">
                                             {this.state.items.map((item) => {
+                                            if(this.props.user)
+                                               if( item.user === this.props.user.displayName || item.user === this.props.user.email) 
                                                 return (
                                                     <li className= "myitem" key={item.id}>
                                                         <h3>{item.itemtitle}</h3>
@@ -96,6 +103,11 @@ constructor(props){
                                                         </p>
                                                     </li>
                                                 )
+                                               else
+                                                return(
+                                                    <div></div>
+                                                )
+                                                
                                             })}
                                             </ul>
                                       

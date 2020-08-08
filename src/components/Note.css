@@ -18,6 +18,19 @@
   margin: 0 auto;
 }
 
+.warning{
+  margin: 0;
+  color:  #039be5;
+  font-weight: 100;
+  padding: 15px;
+  font-size: 20px;
+  font-family: 'Crete Round', serif ;
+  border-radius: 10px;
+  text-align: center;
+  
+
+}
+
 .add-item {
   border-radius: 2px;
   border-top: 3px solid #103D5D;
